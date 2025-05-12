@@ -1,0 +1,52 @@
+---
+title: "ECON 125 Problem Set 1"
+author: Xinyuan Zhang
+output: html_document # can change to pdf_document if you have LaTeX
+---
+
+```{r, message = FALSE, include = FALSE}
+# This code block sets up the R environment for you
+# You do not need to edit it
+
+# Clear the R environment
+rm(list=ls())
+
+# Load tidyverse
+library(tidyverse)
+
+# Load data into data frame and call it df
+df <- read_csv(url("https://github.com/tomvogl/econ125/raw/main/data/UN_pop_change_country_year.csv"))
+
+# Ask R to only report 2 significant digits
+options(digits = 2)
+```
+
+## Summary statistics for the full dataset
+
+```{r}
+world_pop_df <- 
+    df |> 
+    summarise(mean = mean(pop),
+              minimum = min(pop),
+              maximum = max(pop))
+```
+
+The largest population in the world is 1438.07 million people which was India in 2023.
+
+## Summary statistics for 1950 and 2023
+
+```{r}
+statistics_1950_2023 <-
+    df |>
+    filter(year == 1950|
+           year == 2023) |>
+    group_by(year) |>
+    summarise(mean = mean(pop),
+              minimum = min(pop),
+              maximum = max(pop))
+```
+
+The largest population in 1950 was China with 544.044 million people and the largest population in 2023 was India with 1438.07 million people.
+
+## Exam accommodations
+No exam accommodation is needed. 
